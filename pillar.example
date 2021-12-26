@@ -1,0 +1,4 @@
+tool:
+  users:
+    - name: user
+      xdg: true
