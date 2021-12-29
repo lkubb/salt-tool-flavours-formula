@@ -1,4 +1,4 @@
 tool:
   users:
-    - name: user
-      xdg: true
+    user:
+      dotconfig: true

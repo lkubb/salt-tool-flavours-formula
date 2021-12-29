@@ -1,5 +1,6 @@
-{%- for user in salt['pillar.get']('tool:user', []) %}
-{%- from 'tool/rbw/map.jinja' import user with context %}
+{%- from 'tool-flavours/map.jinja' import flavours %}
+
+{%- for user in flavours.users | selectattr('dotconfig') %}
 flavours configuration is setup for user '{{ user.name }}':
   file.managed:
     - name: {{ user.home }}/.config/flavours/config.toml
