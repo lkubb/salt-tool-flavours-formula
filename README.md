@@ -51,6 +51,14 @@ user:
 #### Formula-specific
 Currently, there are none.
 
+### Dotfiles
+`tool-flavours.configsync` will recursively apply templates from 
+
+- `salt://dotconfig/<user>/flavours` or
+- `salt://dotconfig/flavours`
+
+to the user's config dir for every user that has it enabled (see `user.dotconfig`). The target folder will not be cleaned by default (ie files in the target that are absent from the user's dotconfig will stay).
+
 ## Todo
 * Design salt `cargo` module/state and use it
 * make installation destination configurable

@@ -12,5 +12,7 @@ flavours configuration is setup for user '{{ user.name }}':
     - template: jinja
     - user: {{ user.name }}
     - group: {{ user.group }}
-    - mode: '0600'
+    - file_mode: keep
+    - dir_mode: '0700'
+    - makedirs: True
 {%- endfor %}
