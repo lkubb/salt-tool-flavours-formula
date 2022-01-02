@@ -5,8 +5,8 @@ flavours configuration is setup for user '{{ user.name }}':
   file.managed:
     - name: {{ user.home }}/.config/flavours/config.toml
     - source:
-      - salt://user/{{ user.name }}/dotfiles/flavours/config.toml
-      - salt://user/dotfiles/flavours/config.toml
+      - salt://dotconfig/{{ user.name }}/flavours/config.toml
+      - salt://dotconfig/flavours/config.toml
     - context:
         user: {{ user }}
     - template: jinja
