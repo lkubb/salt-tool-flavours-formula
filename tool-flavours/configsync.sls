@@ -1,6 +1,6 @@
 {%- from 'tool-flavours/map.jinja' import flavours %}
 
-{%- for user in flavours.users | selectattr('dotconfig') %}
+{%- for user in flavours.users | selectattr('dotconfig', 'defined') | selectattr('dotconfig') %}
 flavours configuration is setup for user '{{ user.name }}':
   file.managed:
     - name: {{ user.home }}/.config/flavours/config.toml

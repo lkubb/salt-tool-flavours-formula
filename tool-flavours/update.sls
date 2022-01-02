@@ -1,6 +1,6 @@
 {%- from 'tool-flavours/map.jinja' import flavours %}
 
-{%- if flavours.users | selectattr('dotconfig') %}
+{%- if flavours.users | selectattr('dotconfig', 'defined') | selectattr('dotconfig') %}
 include:
   - .configsync
 {%- endif %}
