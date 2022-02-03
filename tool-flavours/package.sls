@@ -9,7 +9,7 @@ Rust is available for user {{ user.name }}:
 
 Flavours is installed for user {{ user.name }}:
   cmd.run:
-    - name: cargo --locked --root=${HOME}/.local install flavours # installs flavours into ~/.local/bin
+    - name: cargo install --locked --root=${HOME}/.local flavours # installs flavours into ~/.local/bin
     - runas: {{ user.name }}
     - unless:
       - sudo -u {{ user.name }} which flavours
