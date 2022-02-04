@@ -12,5 +12,6 @@ Flavours is installed for user {{ user.name }}:
     - name: cargo install --locked --root=${HOME}/.local flavours # installs flavours into ~/.local/bin
     - runas: {{ user.name }}
     - unless:
-      - sudo -u {{ user.name }} which flavours
+      - test -x {{ user.home }}/.local/bin/flavours
+      #- sudo -u {{ user.name }} which flavours
 {%- endfor %}
