@@ -46,13 +46,18 @@ The following shows an example of `tool-flavours` pillar configuration. Namespac
 ```yaml
 user:
   dotconfig: true # sync flavours.toml from dotfiles repo
+  flavours:
+    # this git repo will be used to discover base16 schemes
+    schemes_source: https://github.com/chriskempson/base16-schemes-source.git
+    # this git repo will be used to discover base16 templates
+    templates_source: https://github.com/chriskempson/base16-templates-source.git
 ```
 
 #### Formula-specific
 Currently, there are none.
 
 ### Dotfiles
-`tool-flavours.configsync` will recursively apply templates from 
+`tool-flavours.configsync` will recursively apply templates from
 
 - `salt://dotconfig/<user>/flavours` or
 - `salt://dotconfig/flavours`

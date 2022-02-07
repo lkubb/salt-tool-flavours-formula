@@ -2,6 +2,7 @@
 
 include:
   - .package
+  - .sources
 {%- if flavours.users | selectattr('dotconfig', 'defined') | selectattr('dotconfig') %}
   - .configsync
 {%- endif %}

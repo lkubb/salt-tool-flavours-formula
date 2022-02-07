@@ -35,8 +35,14 @@ config: {{ salt['cmd.run']('[ -n "$XDG_CONFIG_HOME" ] && echo "${XDG_CONFIG_HOME
 data: {{ salt['cmd.run']('[ -n "$XDG_DATA_HOME" ] && echo "${XDG_DATA_HOME}" || echo "${HOME}/.local/share"', runas=user) }}
 state: {{ salt['cmd.run']('[ -n "$XDG_STATE_HOME" ] && echo "${XDG_STATE_HOME}" || echo "${HOME}/.local/state"', runas=user) }}
     {%- endload -%}
+    {%- set confdir = xdg.config ~ '/flavours' %}
+    {%- set datadir = xdg.data ~ '/flavours' %}
     {%- do users[user].update({'xdg': xdg}) -%}
+  {%- else %}
+    {%- set confdir = user_info.home ~ '/Library/Preferences/flavours' %}
+    {%- set datadir = user_info.home ~ '/Library/Application Support/flavours' %}
   {%- endif -%}
+  {%- do users[user]._flavours.update({'confdir': confdir, 'datadir': datadir}) -%}
 {%- endfor -%}
 
 {%- do flavours.update({'users': users.values() | list}) -%}
