@@ -11,6 +11,7 @@ Flavours sources are set up for user '{{ user.name }}':
     - contents: |
         schemes: {{ user.flavours.get('schemes_source', 'https://github.com/chriskempson/base16-schemes-source.git') }}
         templates: {{ user.flavours.get('templates_source', 'https://github.com/chriskempson/base16-templates-source.git') }}
+    - contents_newline: False # otherwise the file will always change
     - user: {{ user.name }}
     - group: {{ user.group }}
     - makedirs: true
