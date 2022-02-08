@@ -45,6 +45,8 @@ tool:
 The following shows an example of `tool-flavours` pillar configuration. Namespace it to `tool:users` and/or `tool:flavours:users`.
 ```yaml
 user:
+  # put completions into this folder, relative to user home
+  completions: .local/share/zsh/completions
   dotconfig: true # sync flavours.toml from dotfiles repo
   flavours:
     # this git repo will be used to discover base16 schemes
@@ -70,3 +72,4 @@ to the user's config dir for every user that has it enabled (see `user.dotconfig
 * add bin dir to path ?
 * consider global installation, not per-user
 * currently, there is no way to force XDG dirs on MacOS
+* check if flavours can be updated and update
