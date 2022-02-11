@@ -45,9 +45,11 @@ tool:
 The following shows an example of `tool-flavours` pillar configuration. Namespace it to `tool:users` and/or `tool:flavours:users`.
 ```yaml
 user:
-  # put completions into this folder, relative to user home
+  # put completions into this directory, relative to user home
   completions: .local/share/zsh/completions
-  dotconfig: true # sync flavours.toml from dotfiles repo
+  # sync flavours.toml from dotfiles repo available as
+  # salt://dotconfig/<user>/flavours or salt://dotconfig/flavours
+  dotconfig: true
   flavours:
     # this git repo will be used to discover base16 schemes
     schemes_source: https://github.com/chriskempson/base16-schemes-source.git
@@ -56,7 +58,16 @@ user:
 ```
 
 #### Formula-specific
-Currently, there are none.
+```yaml
+tool:
+  flavours:
+    defaults:
+      # this git repo will be used to discover base16 schemes
+      schemes_source: https://github.com/chriskempson/base16-schemes-source.git
+      # this git repo will be used to discover base16 templates
+      templates_source: https://github.com/chriskempson/base16-templates-source.git
+```
+
 
 ### Dotfiles
 `tool-flavours.configsync` will recursively apply templates from
