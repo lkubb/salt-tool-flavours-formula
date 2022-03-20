@@ -8,7 +8,7 @@ flavours configuration is setup for user '{{ user.name }}':
       - salt://dotconfig/{{ user.name }}/flavours/config.toml
       - salt://dotconfig/flavours/config.toml
     - context:
-        user: {{ user }}
+        user: {{ user | json }}
     - template: jinja
     - user: {{ user.name }}
     - group: {{ user.group }}
