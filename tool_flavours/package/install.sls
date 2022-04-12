@@ -10,12 +10,14 @@
 include:
   - tool_rust
 
+
 {%-   for user in flavours.users %}
 
 Flavours is installed for user '{{ user.name }}':
   cargo.installed:
     - name: {{ flavours.lookup.pkg.name }}
     - version: {{ flavours.get('version') or 'latest' }}
+    - user: {{ user.name }}
     {#- do not specify alternative return value to be able to unset default version #}
     - locked: true
     - root: {{ user.home | path_join('.local') }}

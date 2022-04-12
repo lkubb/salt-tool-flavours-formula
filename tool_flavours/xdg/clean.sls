@@ -7,7 +7,7 @@
 
 
 {%- if 'Darwin' == grains.kernel %}
-{%-   for user in flavours.users | rejectattr('xdg', 'sameas', False) %}
+{%-   for user in flavours.users | rejectattr('xdg', 'sameas', false) %}
 
 {%-     set user_default_conf = user.home | path_join(flavours.lookup.paths.confdir) %}
 {%-     set user_xdg_confdir = user.xdg.config | path_join(flavours.lookup.paths.xdg_dirname) %}

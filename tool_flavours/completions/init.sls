@@ -9,6 +9,7 @@
 include:
   - {{ sls_package_install }}
 
+
 {%- for user in flavours.users | selectattr('completions', 'defined') | selectattr('completions') %}
 
 Completions directory for Flavours is available for user '{{ user.name }}':

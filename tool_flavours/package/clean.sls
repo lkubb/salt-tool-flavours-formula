@@ -9,6 +9,7 @@
 include:
   - {{ sls_config_clean }}
 
+
 Flavours is removed:
   pkg.removed:
     - name: {{ flavours.lookup.pkg.name }}

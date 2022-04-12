@@ -10,7 +10,7 @@ include:
 
 
 {%- if 'Darwin' == grains.kernel %}
-{%-   for user in flavours.users | rejectattr('xdg', 'sameas', False) %}
+{%-   for user in flavours.users | rejectattr('xdg', 'sameas', false) %}
 
 {%-     set user_default_conf = user.home | path_join(flavours.lookup.paths.confdir) %}
 {%-     set user_default_data = user.home | path_join(flavours.lookup.paths.datadir) %}
