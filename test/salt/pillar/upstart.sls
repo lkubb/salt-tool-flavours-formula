@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 # vim: ft=yaml
+# yamllint disable rule:comments-indentation
 ---
 tool_global:
   users:
@@ -26,6 +26,7 @@ tool_flavours:
       conffile: 'config.toml'
       xdg_dirname: 'flavours'
       xdg_conffile: 'config.toml'
+    rootgroup: root
 
   tofs:
     # The files_switch key serves as a selector for alternative

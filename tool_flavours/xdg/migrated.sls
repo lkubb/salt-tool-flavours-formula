@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
+{%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as flavours with context %}
 
 include:
   - {{ tplroot }}.package
 
 
-{%- if 'Darwin' == grains.kernel %}
-{%-   for user in flavours.users | rejectattr('xdg', 'sameas', false) %}
+{%- if "Darwin" == grains.kernel %}
+{%-   for user in flavours.users | rejectattr("xdg", "sameas", false) %}
 
 {%-     set user_default_conf = user.home | path_join(flavours.lookup.paths.confdir) %}
 {%-     set user_default_data = user.home | path_join(flavours.lookup.paths.datadir) %}
@@ -70,7 +69,7 @@ Flavours uses XDG dirs during this salt run:
     - require_in:
       - Flavours setup is completed
 
-{%-     if user.get('persistenv') %}
+{%-     if user.get("persistenv") %}
 
 persistenv file for Flavours exists for user '{{ user.name }}':
   file.managed:

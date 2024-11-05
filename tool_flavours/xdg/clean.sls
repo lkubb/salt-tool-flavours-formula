@@ -1,12 +1,15 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
+{#-
+    Removes Flavours XDG compatibility crutches for all managed users.
+#}
+
+{%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as flavours with context %}
 
 
-{%- if 'Darwin' == grains.kernel %}
-{%-   for user in flavours.users | rejectattr('xdg', 'sameas', false) %}
+{%- if grains.kernel == "Darwin" %}
+{%-   for user in flavours.users | rejectattr("xdg", "sameas", false) %}
 
 {%-     set user_default_conf = user.home | path_join(flavours.lookup.paths.confdir) %}
 {%-     set user_xdg_confdir = user.xdg.config | path_join(flavours.lookup.paths.xdg_dirname) %}
@@ -24,7 +27,7 @@ Flavours does not use XDG dirs during this salt run:
         FLAVOURS_DATA_DIRECTORY: false
     - false_unsets: true
 
-{%-     if user.get('persistenv') %}
+{%-     if user.get("persistenv") %}
 
 Flavours is ignorant about XDG location for user '{{ user.name }}':
   file.replace:
@@ -33,11 +36,11 @@ Flavours is ignorant about XDG location for user '{{ user.name }}':
     # it seems once anything longer than CARGO_HOME is inserted for the first
     # variable, something breaks:
     # Rendering SLS 'base:tool_flavours.xdg.clean' failed: could not find expected ':'
-    - text: {{ ( '^(' ~ ('export FLAVOURS_DATA_DIRECTORY="${XDG_DATA_HOME:-$HOME/.local/share/' ~ flavours.lookup.paths.xdg_dirname ~ '"')
-              | regex_escape ~ '|' ~
-              ('export FLAVOURS_CONFIG_FILE=${XDG_CONFIG_HOME:-$HOME/.config/' ~ flavours.lookup.paths.xdg_dirname
+    - text: {{ ( "^(" ~ ('export FLAVOURS_DATA_DIRECTORY="${XDG_DATA_HOME:-$HOME/.local/share/' ~ flavours.lookup.paths.xdg_dirname ~ '"')
+              | regex_escape ~ "|" ~
+              ("export FLAVOURS_CONFIG_FILE=${XDG_CONFIG_HOME:-$HOME/.config/" ~ flavours.lookup.paths.xdg_dirname
                 | path_join(flavours.lookup.paths.xdg_conffile) ~ '"') | regex_escape
-                ~ ')$') | yaml }}
+                ~ ")$") | yaml }}
     - repl: ''
     - ignore_if_missing: true
 {%-     endif %}

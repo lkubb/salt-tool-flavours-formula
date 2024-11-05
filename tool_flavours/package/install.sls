@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
+{%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as flavours with context %}
 
-{%- if 'cargo' in salt['saltutil.list_extmods']().get('states', []) %}
+{%- if "cargo" in salt["saltutil.list_extmods"]().get("states", []) %}
 
 include:
   - tool_rust
@@ -15,11 +14,11 @@ include:
 Flavours is installed for user '{{ user.name }}':
   cargo.installed:
     - name: {{ flavours.lookup.pkg.name }}
-    - version: {{ flavours.get('version') or 'latest' }}
+    - version: {{ flavours.get("version") or "latest" }}
     - user: {{ user.name }}
     {#- do not specify alternative return value to be able to unset default version #}
     - locked: true
-    - root: {{ user.home | path_join('.local') }}
+    - root: {{ user.home | path_join(".local") }}
     - require_in:
       - Flavours setup is completed
 {%-   endfor %}
@@ -36,13 +35,13 @@ Rust is available:
 
 Check if flavours is installed for user '{{ user.name }}':
   cmd.run:
-    - name: test -x {{ user.home | path_join('.local', 'bin', 'flavours') }}
+    - name: test -x {{ user.home | path_join(".local", "bin", "flavours") }}
     - runas: {{ user.name }}
     - python_shell: True # command uses shell features
     - onfail_in:
       - Flavours is installed for user '{{ user.name }}'
 
-{%-     if 'latest' == flavours.version %}
+{%-     if flavours.version == "latest" %}
 
 Check if flavours is up to date for user '{{ user.name }}':
   cmd.run:
