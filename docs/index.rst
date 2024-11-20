@@ -1,5 +1,5 @@
-Welcome to salt-tool-flavours-formula's documentation!
-======================================================
+Welcome to tool-flavours-formula's documentation!
+=================================================
 
 .. toctree::
    :maxdepth: 2
